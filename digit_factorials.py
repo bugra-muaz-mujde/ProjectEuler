@@ -5,7 +5,6 @@ def get_factorial(num):
         factorial *= count
     return factorial
 
-print(get_factorial(9))
 
 curious_numbers = []
 total = 0

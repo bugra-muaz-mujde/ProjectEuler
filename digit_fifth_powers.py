@@ -7,4 +7,4 @@ for digit in range(0, 10):
 
 for power in range(0, len(fifth_powers)):
     for other_powers in range(0, len(fifth_powers)):
-        powers_dict[]
+        pass

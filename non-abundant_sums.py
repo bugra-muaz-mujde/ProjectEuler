@@ -32,9 +32,19 @@ for x in range(0, len(abundant_list)):
         if sum_of_two_abundant_nums <= 28123:
             list_of_sum_of_two_abundant_numbers.append(sum_of_two_abundant_nums)
 
-total = 0
-for positive_integer in range(1, 28124):
-    if positive_integer not in list_of_sum_of_two_abundant_numbers:
-        total += positive_integer
-    print(positive_integer)
-print(total)
+
+all_integers = [0] * 28123
+count = 1
+for index in range(len(all_integers)):
+    all_integers[index] = count
+    count += 1
+
+print(len(list_of_sum_of_two_abundant_numbers))
+for index in range(len(list_of_sum_of_two_abundant_numbers)):
+    try:
+        all_integers.remove(list_of_sum_of_two_abundant_numbers[index])
+    except:
+        pass
+    print(index)
+
+print(sum(all_integers))
