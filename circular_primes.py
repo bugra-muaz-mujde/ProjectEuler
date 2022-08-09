@@ -1,3 +1,7 @@
+import time
+
+start_time = time.time()
+
 
 def sieve_of_sundaram(n):
     k = (n - 2) // 2  # sınır belirliyor
@@ -17,19 +21,38 @@ def sieve_of_sundaram(n):
     return prime_list
 
 
-#  13579 -> 57913 79135 91357 35791
-
-
 def get_rotations(prime):
-    current_index = 0
-    rotation = ""
-    rotations = [prime]
-    for digit in str(prime):
-        if int(digit) % 2 == 0:
-            return False
+    rotations = [prime] * len(prime)
+    for digit_position, digit in enumerate(prime):
+        if int(digit) % 2 == 0 and prime != "2":
+            return None
+        index = digit_position
+        for rotation in range(0, len(rotations)):
+            prime = rotations[rotation]
+            rotations[rotation] = prime[: index] + digit + prime[index + 1:]
+            if index == 0:
+                index = len(prime) - 1
+            else:
+                index -= 1
+    return rotations
 
 
-print(get_rotations(197))
+def is_circular_prime(rotations, prime_list):
+    if rotations:
+        for rotation in rotations:
+            if int(rotation) not in prime_list:
+                return False
+    else:
+        return False
+    return True
 
 
-GOIRBY
+primes = sieve_of_sundaram(1000000)
+circular_prime_count = 0
+
+for prime in primes:
+    if is_circular_prime(get_rotations(str(prime)), primes):
+        circular_prime_count += 1
+
+print(circular_prime_count)
+print("--- %s seconds ---" % (time.time() - start_time))
