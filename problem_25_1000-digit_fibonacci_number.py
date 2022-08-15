@@ -13,4 +13,3 @@ while True:
         print("index of 1000digit fib number : ", count)
         break
 
-

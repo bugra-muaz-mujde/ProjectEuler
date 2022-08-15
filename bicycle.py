@@ -81,7 +81,7 @@ while True:
     if keyboard.is_pressed("w"):
         bike1.increase_cadence()
         time.sleep(60/(bike1.speed ** 2))
-        os.system("clear")
+        os.system("cls")
         bike1.move_bike()
         bike1.get_bike_data()
         for bike in bike1.bike:
