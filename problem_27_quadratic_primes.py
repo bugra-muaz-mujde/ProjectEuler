@@ -1,5 +1,7 @@
 
 def is_prime(n):
+    if n < 0:
+        return False
     if n & 1 == 0:
         return False
     d = 3
@@ -28,19 +30,15 @@ def count_primes(a, b):
     return count
 
 
-for n in range(70):
-    print(is_prime(quadratic_formula(n, 67, 997)))
-
 max_number_of_primes = 0
 max_a = 0
 max_b = 0
-for a in range(0, -1000, -1):
-    for b in range(1000, 1, -1):
+max_coefficient = 0
+for a in range(-1000, 1000):
+    for b in range(1, 1000):
         incredible = count_primes(a, b)
-        if a == -61 and b == 997:
-            print(incredible)
         if max_number_of_primes < incredible:
             max_number_of_primes = incredible
-            max_a = a
-            max_b = b
+            max_coefficient = a * b
 
+print(max_coefficient)

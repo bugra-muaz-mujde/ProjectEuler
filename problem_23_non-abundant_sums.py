@@ -2,40 +2,33 @@ import math
 
 
 def is_abundant(n):
-    # Check if the number n is divisible by numbers from 2 to half of n
-    sumOfDivisors = 1 # 1 is always a proper divisor
-    for x in range(2, (n//2 + 1)):
-        if n % x == 0:
-            sumOfDivisors += x
-    return sumOfDivisors > n
+    divs = [1]
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            divs.extend([i, n/i])
+    return sum(list(set(divs))) > n
 
 
-positives = [0] * 28124
-abundants = []
+abundant_numbers = []
+sum_of_two_abundants = []
 for number in range(1, 28124):
-    positives[number - 1] = number
     if is_abundant(number):
-        abundants.append(number)
-count = 0
-for abundant_number in abundants:
-    positives[abundant_number - 1] = 0
-    count += 1
-    for sub_abundant_number in abundants:
-        sum_of_two_abundants = abundant_number + sub_abundant_number
-        if sum_of_two_abundants < len(positives):
-            positives[sum_of_two_abundants - 1] = 0
-            count += 1
+        abundant_numbers.append(number)
 
-abundantSums = set([])
-for numOne in abundants:
-    for numTwo in abundants:
-        abSum = numOne + numTwo
-        if abSum > 28123:
-            break
-        else:
-            abundantSums.add(abSum)
+for abundant in abundant_numbers:
+    for sub_abundant in abundant_numbers:
+        if abundant + sub_abundant < 28123:
+            sum_of_two_abundants.append(abundant + sub_abundant)
 
-print(len(abundantSums))
-print(count)
 
-print(sum(positives))
+sum_of_two_abundants = list(set(sum_of_two_abundants))
+sum_of_two_abundants.sort()
+
+sum_of_positives = 0
+index = 0
+for positive in range(0, 28123):
+    if positive == sum_of_two_abundants[index]:
+        index += 1
+    else:
+        sum_of_positives += positive
+print(sum_of_positives)
