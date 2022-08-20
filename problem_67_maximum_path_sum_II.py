@@ -69,3 +69,22 @@ print(max(triangle[len(triangle) - 1]))
 
 for i in triangle:
     print(i)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
