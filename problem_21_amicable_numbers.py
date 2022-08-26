@@ -1,8 +1,4 @@
 
-import time
-
-start = time.time()
-
 
 def get_sum_of_divisors(amicable):
     sum_of_divisors = 0
@@ -24,8 +20,3 @@ for key in amicable_dict:
             sum_of_amicables += key
 
 print(int(sum_of_amicables/2))
-
-end = time.time()
-
-total_time = end - start
-print("\n"+ str(total_time))
