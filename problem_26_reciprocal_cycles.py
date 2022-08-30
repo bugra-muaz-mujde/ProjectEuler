@@ -1,48 +1,47 @@
 
-def is_cycle(string, letter):
-    for char in string:
-        if char == letter:
-            return False
-    return True
-
-
-decimals = {}
-
-for decimal in range(2, 1000):
-    if len(str(1/decimal).split(".")[1]) > 4:
-        decimals[decimal] = str(1/decimal).split(".")[1]
-
-print(len(decimals[1000]))
-decimal_string = ""
-
-cycle_digit = 0
-longest_cycle = 0
-longest_decimal = ""
-for decimal in decimals:
-    for index, digit in enumerate(decimals[decimal]):
-        if is_cycle(decimal_string, digit):
-            decimal_string += digit
+def reduce_zeros(number):
+    while True:
+        if number % 10 == 0:
+            number //= 10
         else:
-            if decimal_string == decimals[decimal][index: index + len(decimal_string)]:
-                cycle_digit = len(decimal_string)
-                if cycle_digit > 7:
-                    print(cycle_digit)
-                    print(decimal)
-            else:
-                decimal_string = digit
-    if longest_cycle < cycle_digit:
-        longest_cycle = cycle_digit
-        longest_decimal = decimal
-    decimal_string = ""
+            return number
 
 
-print(longest_cycle)
-print(longest_decimal)
+def division(dividend, divisor, iterate=2000):
+    divisor = reduce_zeros(divisor)
+    number_string = ""
+    while dividend != 0 and iterate > 0:
+        while dividend < divisor:
+            dividend *= 10
+            if dividend < divisor:
+                number_string += "0"
+                iterate -= 1
+        number_string += str(dividend // divisor)
+        dividend = dividend % divisor
+        iterate -= 1
+    return number_string
 
 
+def recurring_cycle(number):
+    index = 0
+    cycle = ""
+    max_cycle = 0
+    while index < len(number):
+        cycle += number[index]
+        if cycle == number[index + 1: index + 1 + len(cycle)]:
+            max_cycle = len(cycle)
+            cycle = ""
+        index += 1
+    return max_cycle
 
 
-
-
+longest_cycle = 0
+number_contains_longest_cycle = 0
+for i in range(2, 1000):
+    cycle = recurring_cycle(division(1, i))
+    if longest_cycle < cycle:
+        longest_cycle = cycle
+        number_contains_longest_cycle = i
+print(number_contains_longest_cycle)
 
 
