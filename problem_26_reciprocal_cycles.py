@@ -21,7 +21,6 @@ def division(dividend, divisor, iterate=2000):
         iterate -= 1
     return number_string
 
-
 def recurring_cycle(number):
     index = 0
     cycle = ""

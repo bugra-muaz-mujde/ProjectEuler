@@ -22,7 +22,7 @@ def check_difference(pentagon_list, cursor, start_index):
                 return True
 
 
-def check_sum(pentagon_list, cursor):
+def is_check_sum(pentagon_list, cursor):
     current_index = len(pentagon_list) + 1
     while True:
         pentagon = get_pentagonal_number(current_index)
@@ -32,6 +32,7 @@ def check_sum(pentagon_list, cursor):
             return True
         current_index += 1
 
+
 d_number = 0
 pentagonals = [get_pentagonal_number(1), get_pentagonal_number(2)]
 j_cursor = 0
@@ -40,7 +41,7 @@ while d_number == 0:
     pentagonals.append(get_pentagonal_number(k_cursor + 1))
     while j_cursor < k_cursor:
         if check_difference(pentagonals, pentagonals[k_cursor] - pentagonals[j_cursor], int(math.sqrt(k_cursor + j_cursor))):
-            if check_sum(pentagonals, pentagonals[k_cursor] + pentagonals[j_cursor]):
+            if is_check_sum(pentagonals, pentagonals[k_cursor] + pentagonals[j_cursor]):
                 d_number = get_pentagonal_number(k_cursor + 1) - get_pentagonal_number(j_cursor + 1)
         j_cursor += 1
     j_cursor = 0
@@ -50,6 +51,6 @@ print(d_number)
 end = time.time()
 
 total_time = end - start
-print("\n"+ str(total_time))
+print("\n" + str(total_time))
 
 #  start cursor might be root sum of k_cursor and j_cursor lkjasglkjaskgljaskjgaksljgkajlsk -1 second*
